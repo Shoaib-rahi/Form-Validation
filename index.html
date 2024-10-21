@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        padding: 20px 80px;
+        background-color: #95a5a6;
+    }
+    .designform{
+     font-size: 2rem;
+     
+    }
+    .designform input{
+        width: 50%;
+        padding: 15px 20px;
+        margin: 10px 0px;
+        border-radius: 5px;
+        border: 2px solid blue;
+    }
+    .formerror{
+        color: red;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 0px 10px;
+    }
+    .btn{
+        font-size: 1.5rem;
+        width: 150px;
+        padding: 10px 25px;
+        border: 2px solid black;
+    }
+</style>
+<body>
+        <h1>login form</h1>
+        <form action="/myaction.php" name="myform" onsubmit="return validatedform()" method="post">
+            <div class="designform" id="name">
+                name :<input type="text" name="fname" ><b><span class="formerror"></span></b>
+            </div>
+            <div class="designform" id="email">
+                email :<input type="email" name="femail" ><b><span class="formerror"></span></b>
+            </div>
+            <div class="designform" id="phone">
+                phone :<input type="number" name="fphone" ><b><span class="formerror"></span></b>
+            </div>
+            <div class="designform" id="password">
+                password :<input type="text" name="fpass" ><b><span class="formerror"></span></b>
+            </div>
+            <div class="designform" id="cpassword">
+                confirmpassword :<input type="text" name="fcpass" ><b><span class="formerror"></span></b>
+            </div>
+<input type="submit"  name="submit"value="submit" class="btn">
+        </form>
+        <script>
+
+            function clearError(){
+                error = document.getElementsByClassName("formerror");
+                
+                for(let item of error){
+                    item.innerHTML = "";
+                    
+                }
+            }
+ function seterror(id,error){
+    // set error inside id tag
+
+   element = document.getElementById(id);
+   element.getElementsByClassName("formerror")[0].innerHTML = error;
+
+    }
+    function validatedform(){
+        var retrunval = true;
+        clearError();
+        var name = document.forms["myform"]["fname"].value.trim();
+     if(name.length < 5){
+        seterror("name","*name length is too short");
+        retrunval = false;
+     }
+     if(name.length == ""){
+        seterror("name","*name must be requried");
+        retrunval = false;
+     }
+     var email = document.forms["myform"]["femail"].value.trim();
+     if(email.length > 15){
+        seterror("email","*email length is too long");
+        retrunval = false;
+     }
+     if(email.length == ""){
+        seterror("email","*email is must be required");
+        retrunval = false;
+     }
+     var phone = document.forms["myform"]["fphone"].value.trim();
+     if(phone.length != 11){
+        seterror("phone","*phoe must be required 11 degits");
+        retrunval = false;
+     }
+     if(phone.length == ""){
+        seterror("phone","*phone is must be required");
+        retrunval = false;
+     }
+     var password = document.forms["myform"]["fpass"].value.trim();
+     if(password.length < 6){
+        seterror("password","*passwod needs at least 6 characters");
+        retrunval = false;
+     }
+     if(password.length == ""){
+        seterror("password","*password is must be required");
+        retrunval = false;
+     }
+     var cpassword = document.forms["myform"]["fcpass"].value.trim();
+     if(cpassword != password){
+        seterror("cpassword","*passwrod dons't match");
+        retrunval = false;
+     }
+     if(cpassword == ""){
+        seterror("cpassword","*password is must be required");
+        retrunval = false;
+     }
+    
+
+
+
+       return retrunval;
+    }
+        </script>
+</body>
+</html>
